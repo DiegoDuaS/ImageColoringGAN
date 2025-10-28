@@ -14,7 +14,19 @@ TARGET_SIZE = (128, 128)
 os.makedirs(OUTPUT_COLOR, exist_ok=True)
 os.makedirs(OUTPUT_GRAY, exist_ok=True)
 
-# Contador de imágenes global
+# Mapeo de categorías a número
+CATEGORY_MAP = {
+    "airplane": 1,
+    "car": 2,
+    "cat": 3,
+    "dog": 4,
+    "flower": 5,
+    "fruit": 6,
+    "motorbike": 7,
+    "person": 8
+}
+
+# Contadores
 counter = 1
 errors = 0
 
@@ -24,7 +36,13 @@ for category in os.listdir(INPUT_DIR):
     if not os.path.isdir(category_path):
         continue
 
-    print(f"Procesando categoría: {category}")
+    # Obtener ID de categoría
+    cat_id = CATEGORY_MAP.get(category.lower())
+    if cat_id is None:
+        print(f"⚠️  Categoría '{category}' no está en el mapa, se omite.")
+        continue
+
+    print(f"Procesando categoría: {category} ({cat_id})")
 
     for img_name in tqdm(os.listdir(category_path)):
         img_path = os.path.join(category_path, img_name)
@@ -40,16 +58,16 @@ for category in os.listdir(INPUT_DIR):
                 paste_y = (TARGET_SIZE[1] - img.height) // 2
                 new_img.paste(img, (paste_x, paste_y))
 
-                # Nombre nuevo: img00001.jpg
-                new_name = f"img{counter:05d}.jpg"
+                # Nombre nuevo: color_00001_1.jpg / gray_00001_1.jpg
+                base_name = f"{counter:05d}_{cat_id}.jpg"
 
                 # Guardar color
-                color_path = os.path.join(OUTPUT_COLOR, new_name)
+                color_path = os.path.join(OUTPUT_COLOR, f"color_{base_name}")
                 new_img.save(color_path)
 
                 # Guardar escala de grises
                 gray_img = new_img.convert("L")
-                gray_path = os.path.join(OUTPUT_GRAY, new_name)
+                gray_path = os.path.join(OUTPUT_GRAY, f"gray_{base_name}")
                 gray_img.save(gray_path)
 
                 counter += 1
