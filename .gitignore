@@ -1,2 +1,4 @@
 ImagesProcessed
 ImagesRaw
+__pycache__/
+.gancolor/
