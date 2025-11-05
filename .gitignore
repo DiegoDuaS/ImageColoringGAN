@@ -2,3 +2,8 @@ ImagesProcessed
 ImagesRaw
 __pycache__/
 .gancolor/
+.pth
+*.pth
+
+mypyenv/
+myenv/
