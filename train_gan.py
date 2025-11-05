@@ -7,8 +7,6 @@ Script completo para entrenar la GAN de colorización con:
 - Checkpointing y guardado de modelos
 - Monitoreo de pérdidas y convergencia
 - Experimentación con learning rates
-
-Persona 4: Loop de Entrenamiento y Optimización
 """
 
 import os
