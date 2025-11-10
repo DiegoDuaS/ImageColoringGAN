@@ -281,8 +281,13 @@ class XAIVisualizer:
         ax1 = fig.add_subplot(gs[0, 0]); ax1.imshow(gray_img); ax1.set_title('Entrada (Grayscale)', fontsize=12, fontweight='bold'); ax1.axis('off')
         ax2 = fig.add_subplot(gs[0, 1]); ax2.imshow(real_rgb); ax2.set_title('Ground Truth', fontsize=12, fontweight='bold'); ax2.axis('off')
         ax3 = fig.add_subplot(gs[0, 2]); ax3.imshow(pred_rgb); ax3.set_title('Generado por GAN', fontsize=12, fontweight='bold'); ax3.axis('off')
-        ax4 = fig.add_subplot(gs[0, 3]); diff = np.abs(real_rgb - pred_rgb); ax4.imshow(diff); ax4.set_title('Diferencia (Error)', fontsize=12, fontweight='bold'); ax4.axis('off')
-
+        ax4 = fig.add_subplot(gs[0, 3])
+        diff = np.linalg.norm(real_rgb - pred_rgb, axis=2)  # L2 por píxel
+        vmax = np.percentile(diff, 99)
+        im4  = ax4.imshow(diff, vmin=0, vmax=max(vmax, 1e-3), cmap='inferno')
+        ax4.set_title('Diferencia (Error)', fontsize=12, fontweight='bold')
+        ax4.axis('off')
+        plt.colorbar(im4, ax=ax4, fraction=0.046)
         # Fila 2: Saliency
         ax5 = fig.add_subplot(gs[1, 0]); im5 = ax5.imshow(saliency_maps['channel_a'], cmap='hot'); ax5.set_title('Saliency - Canal A\n(Verde-Rojo)', fontsize=11, fontweight='bold'); ax5.axis('off'); plt.colorbar(im5, ax=ax5, fraction=0.046)
         ax6 = fig.add_subplot(gs[1, 1]); im6 = ax6.imshow(saliency_maps['channel_b'], cmap='hot'); ax6.set_title('Saliency - Canal B\n(Azul-Amarillo)', fontsize=11, fontweight='bold'); ax6.axis('off'); plt.colorbar(im6, ax=ax6, fraction=0.046)
