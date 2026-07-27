@@ -157,3 +157,10 @@ Diffusion-based refinement
 Larger semantic conditioning or text-guided colorization
 
 # 6. Credits
+This project was developed collaboratively by:
+
+- **Sofía Velasquez** [@Sofiamishel2003](https://github.com/Sofiamishel2003)
+- **Diego Duarte** [@DiegoDuaS](https://github.com/DiegoDuaS)
+- **José Marchena** [@MarchMol](https://github.com/MarchMol)
+- **Maria Villafuerte** [@Maria-Villafuerte](https://github.com/Maria-Villafuerte)
+- **Fabiola Contreras** [@Fabiola-cc](https://github.com/Fabiola-cc)
