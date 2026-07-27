@@ -1,4 +1,5 @@
 # Image Coloring GAN
+![Generator Architecture](Analysis/Explainable_AI/complete_xai_analysis_sample_5.png)
 
 A conditional Generative Adversarial Network (cGAN) for automatic image colorization from grayscale images.
 
